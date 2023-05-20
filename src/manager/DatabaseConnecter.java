@@ -20,7 +20,7 @@ public class DatabaseConnecter {
         return null;
     }
 
-    public static void disconnect(Connection connection) {
+    public static Connection disconnect(Connection connection) {
         try {
             if(connection != null){
                 connection.close();
@@ -28,5 +28,6 @@ public class DatabaseConnecter {
         } catch (SQLException e){
             e.getStackTrace();
         }
+        return connection;
     }
 }

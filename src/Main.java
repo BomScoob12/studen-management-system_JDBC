@@ -1,5 +1,8 @@
+import manager.CourseManagement;
 import manager.DatabaseConnecter;
+import manager.Enrollment;
 import manager.StudentMenegement;
+import object.Course;
 import object.Student;
 
 import java.util.Scanner;
@@ -8,6 +11,8 @@ public class Main {
 
     static Scanner scan = new Scanner(System.in);
     static StudentMenegement stdManager = new StudentMenegement();
+    static CourseManagement courseManager = new CourseManagement();
+    static Enrollment enrollment = new Enrollment();
 
     public static void main(String[] args) {
         int option = 10;
@@ -17,13 +22,23 @@ public class Main {
             System.out.println("2. list all student");
             System.out.println("3. get student information");
             System.out.println("4. add new course");
+            System.out.println("5. Delete course");
+            System.out.println("6. Update course");
+            System.out.println("7. List all course");
             System.out.println("0. Exits");
+            System.out.print("Enter menu option: ");
             option = scan.nextInt();
             scan.nextLine();
-            switch(option){
+            switch (option) {
                 case 1 -> testAddStudent();
                 case 2 -> testListAllStudent();
                 case 3 -> testGetStudent();
+                case 4 -> testAddCourse();
+                case 5 -> testDeleteCourse();
+                case 6 -> testUpdateCourse();
+                case 7 -> testListAllCourse();
+                case 8 -> testEnroll();
+                case 9 -> testListEnroll();
             }
             System.out.println("-----------------------");
         }
@@ -59,7 +74,55 @@ public class Main {
 
     }
 
-    private static void addCourse(){
+    private static void testAddCourse(){
+        System.out.println("Add a new course");
+        System.out.println("Enter course ID :");
+        int courseID = scan.nextInt();
+        scan.nextLine();
+        System.out.println("Enter course description :");
+        String desc = scan.nextLine();
+        boolean isSuccess = courseManager.addCourse(new Course(courseID, desc));
+        System.out.println(isSuccess ? "Course added" : "Error");
+    }
 
+    private static void testDeleteCourse(){
+        System.out.println("Delete course");
+        System.out.println("Enter course ID :");
+        int courseID = scan.nextInt();
+        boolean isSuccess = courseManager.deleteCourse(courseID);
+        System.out.println(isSuccess ? "Delete success" : "Error");
+    }
+
+    private static void testUpdateCourse(){
+        System.out.println("Update course");
+        System.out.println("Enter course ID that you need to update:");
+        int courseID = scan.nextInt();
+        scan.nextLine();
+        System.out.println("Enter data that you need to update:");
+        String desc = scan.nextLine();
+        boolean isSuccess = courseManager.updateCourse(courseID, desc);
+        System.out.println(isSuccess ? "Updated" : "Error");
+    }
+
+    private static void testListAllCourse(){
+        System.out.println("List all course");
+        System.out.println("---------------------------------");
+        for (int i = 0; i<courseManager.listAllCourse().size(); i++){
+            System.out.println(courseManager.listAllCourse().get(i));
+        }
+        System.out.println("--------------------------------");
+    }
+
+    private static void testEnroll() {
+
+    }
+
+    private static void testListEnroll() {
+        System.out.println("List Enrollment");
+        System.out.println("---------------------------------");
+        for (int i = 0; i<enrollment.listStudentEnroll().size(); i++){
+            System.out.println(enrollment.listStudentEnroll().get(i));
+        }
+        System.out.println("--------------------------------");
     }
 }
