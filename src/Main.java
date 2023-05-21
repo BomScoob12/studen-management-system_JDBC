@@ -1,10 +1,10 @@
 import manager.CourseManagement;
-import manager.DatabaseConnecter;
 import manager.Enrollment;
 import manager.StudentMenegement;
 import object.Course;
 import object.Student;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -25,6 +25,8 @@ public class Main {
             System.out.println("5. Delete course");
             System.out.println("6. Update course");
             System.out.println("7. List all course");
+            System.out.println("8. Enroll course to student");
+            System.out.println("9. List all enrollment");
             System.out.println("0. Exits");
             System.out.print("Enter menu option: ");
             option = scan.nextInt();
@@ -114,7 +116,17 @@ public class Main {
     }
 
     private static void testEnroll() {
-
+        System.out.println("Enroll std into course");
+        System.out.println("Enter std id:");
+        int stdID = scan.nextInt();
+        scan.nextLine();
+        System.out.println("Example: (Course ID: 1,2,3,4)");
+        System.out.println("Enter std course ID: ");
+        String courseID = scan.nextLine();
+        String[] courseIDs = courseID.split(",");
+        int [] allCourseID = Arrays.stream(courseIDs).mapToInt(Integer::parseInt).toArray();
+        boolean isSuccess = enrollment.enrollStudentToCourse(stdID, allCourseID);
+        System.out.println(isSuccess ? "Add success" : "Error");
     }
 
     private static void testListEnroll() {
