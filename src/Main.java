@@ -71,7 +71,7 @@ public class Main {
         int id = scan.nextInt();
         System.out.println("this is results.");
         System.out.println("||-------------------------||");
-        System.out.println(stdManager.getStudentById(3));
+        System.out.println(stdManager.getStudentById(id));
         System.out.println("||-------------------------||");
 
     }
